@@ -1471,26 +1471,32 @@
       }, 
       {
         "type": "checkbox",
-        "id": "enable_cart_gifts",
+        "id": "cart_gifts_enabled",
         "label": "Enable cart gifts",
         "default": false,
         "info": "Enabling this will show the free gifts list regardless of the cart value."
       },
       {
         "type": "text",
-        "id": "threshold",
+        "id": "cart_gifts_threshold",
         "label": "Threshold",
         "info": "The minimum cart value required to show the free gifts list."
       },
       {
         "type": "text", 
-        "id": "utm_source",
-        "label": "UTM Source",
-        "info": "The UTM source value to be used for tracking free gifts. If the URL contains this UTM source, the free gifts list will be shown regardless of the cart value."
+        "id": "cart_gifts_utm_medium",
+        "label": "UTM Medium",
+        "info": "The UTM medium value to be used for tracking free gifts. If the URL contains this UTM medium, the free gifts list will be shown regardless of the cart value."
+      },
+      {
+        "type": "text", 
+        "id": "cart_gifts_header",
+        "label": "Gifts List Header",
+        "default": "Choose a free gift:",
       },
       {
         "type": "product_list",
-        "id": "cart_product_list",
+        "id": "cart_gifts_product_list",
         "label": "Free Gifts List",
         "info": "The list of free gifts to be shown in the cart drawer."
       }
