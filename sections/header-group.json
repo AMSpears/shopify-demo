@@ -27,11 +27,19 @@
             "text": "Welcome to our These prices come once in a lifetime. Shop Women's Stockroom Sale",
             "link": ""
           }
+        },
+        "announcement_mMr7Q4": {
+          "type": "announcement",
+          "settings": {
+            "text": "Just in: New organic cotton pieces for effortless looks. Shop Women Shop Men",
+            "link": ""
+          }
         }
       },
       "block_order": [
         "announcement-bar-0",
-        "announcement_LiLkEg"
+        "announcement_LiLkEg",
+        "announcement_mMr7Q4"
       ],
       "settings": {
         "color_scheme": "scheme-3",
