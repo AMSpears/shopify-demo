@@ -1,0 +1,32 @@
+{%- assign cart_gifts_enabled = settings.cart_gifts_enabled -%}
+{%- assign cart_gifts_threshold_reached = false -%}
+{%- assign cart_total =  cart.total_price | divided_by: 100.0 | round -%}
+{%- assign cart_gifts_threshold = settings.cart_gifts_threshold -%}
+{%- assign cart_type_is_drawer = settings.cart_type == 'drawer' -%}
+
+{% if cart_gifts_threshold != blank %}
+    {%-assign cart_gifts_threshold = settings.cart_gifts_threshold | plus: 0 -%}
+    {% if cart_gifts_threshold >= cart_total %}
+        {%- assign cart_gifts_threshold_reached = true -%}
+    {% endif %}
+{% endif %}
+
+{%- if cart_type_is_drawer and (cart_gifts_enabled or cart_gifts_threshold_reached) -%}
+    <div class="drawer__gifts">
+        <h3 class="drawer__title">{{ settings.cart_gifts_header }}</h3>
+        <div class="drawer__gifts-radio-group">
+            {%- for product in settings.cart_gifts_product_list -%}
+                {%- if product -%}
+                    <div class="drawer__gifts-radio-item">
+                        <input 
+                            type="radio" 
+                            id="product_{{ product.id }}" 
+                            name="gift_product" 
+                            value="{{ product.id }}">
+                        <label for="product_{{ product.id }}">{{ product.title }}</label>
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </div>
+{%- endif -%}
