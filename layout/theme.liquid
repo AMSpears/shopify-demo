@@ -336,8 +336,11 @@
       };
 
       window.cartGifts = {
+        enabled: {{ settings.cart_gifts_enabled | json}},
         utmMedium: {{ settings.cart_gifts_utm_medium | json }},
         productList: {{ settings.cart_gifts_product_list | json }},
+        cartGiftsThreshold: {{ settings.cart_gifts_threshold | json}},
+        cartTotal: {{ cart.total_price | divided_by: 100.0 | round | json }},
       }
 
       window.variantStrings = {
@@ -376,6 +379,7 @@
 
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'cart-gifts.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
   </body>
 </html>
