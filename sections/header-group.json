@@ -20,10 +20,18 @@
             "text": "Enjoy free shipping on orders over $99 and free returns",
             "link": ""
           }
+        },
+        "announcement_LiLkEg": {
+          "type": "announcement",
+          "settings": {
+            "text": "These prices come once in a lifetime. Shop Women's Stockroom Sale Shop Men's Stockroom Sale",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement-bar-0",
+        "announcement_LiLkEg"
       ],
       "settings": {
         "color_scheme": "scheme-3",
