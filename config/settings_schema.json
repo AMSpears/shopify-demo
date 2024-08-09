@@ -1467,7 +1467,7 @@
       {
         "type": "header",
         "content": "Cart Gifts",
-        "info": "This section is only available on cart drawer and cart page."
+        "info": "This section is only available on cart drawer."
       }, 
       {
         "type": "checkbox",
