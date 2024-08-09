@@ -1,17 +1,17 @@
 {%- if settings.cart_type == 'drawer' -%}
-    <div class="drawer__cart-gifts hidden">
-        <h3 class="drawer__cart-gifts__title">{{ settings.cart_gifts_header }}</h3>
-        <div class="drawer__cart-gifts__items">
-            {%- for product in settings.cart_gifts_product_list -%}
-                <div class="gift_item">
-                    <input 
-                        type="radio" 
-                        id="product_{{ product.id }}" 
-                        name="gift_item" 
-                        value="{{ product.id }}">
-                    <label for="product_{{ product.id }}">{{ product.title }}</label>
-                </div>
-            {%- endfor -%}
+  <div class="drawer__cart-gifts hidden">
+    <h3 class="drawer__cart-gifts__title">{{ settings.cart_gifts_header }}</h3>
+    <div class="drawer__cart-gifts__items">
+      {%- for product in settings.cart_gifts_product_list -%}
+        <div class="gift_item">
+          <input 
+            type="radio" 
+            id="product_{{ product.id }}" 
+            name="gift_item" 
+            value="{{ product.id }}">
+          <label for="product_{{ product.id }}">{{ product.title }}</label>
         </div>
+      {%- endfor -%}
     </div>
+  </div>
 {%- endif -%} 
