@@ -1463,6 +1463,36 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "Cart Gifts",
+        "info": "This section is only available on cart drawer and cart page."
+      }, 
+      {
+        "type": "checkbox",
+        "id": "enable_cart_gifts",
+        "label": "Enable cart gifts",
+        "default": false,
+        "info": "Enabling this will show the free gifts list regardless of the cart value."
+      },
+      {
+        "type": "text",
+        "id": "threshold",
+        "label": "Threshold",
+        "info": "The minimum cart value required to show the free gifts list."
+      },
+      {
+        "type": "text", 
+        "id": "utm_source",
+        "label": "UTM Source",
+        "info": "The UTM source value to be used for tracking free gifts. If the URL contains this UTM source, the free gifts list will be shown regardless of the cart value."
+      },
+      {
+        "type": "product_list",
+        "id": "cart_product_list",
+        "label": "Free Gifts List",
+        "info": "The list of free gifts to be shown in the cart drawer."
       }
     ]
   }
