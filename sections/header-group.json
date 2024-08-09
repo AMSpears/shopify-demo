@@ -9,8 +9,6 @@
           "type": "announcement",
           "settings": {
             "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "background-1",
             "link": ""
           }
         }
@@ -18,28 +16,33 @@
       "block_order": [
         "announcement-bar-0"
       ],
-      "disabled": true,
       "settings": {
+        "color_scheme": "scheme-1",
+        "show_line_separator": true,
+        "show_social": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
       }
     },
     "header": {
       "type": "header",
-      "custom_css": [
-        ".header__heading-link .h2 {font-size: 16px;}"
-      ],
       "settings": {
-        "logo_position": "middle-center",
+        "logo_position": "middle-left",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "always",
+        "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
-        "color_scheme": "inverse",
-        "enable_country_selector": false,
-        "enable_language_selector": false,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
         "mobile_logo_position": "center",
         "margin_bottom": 0,
-        "padding_top": 8,
-        "padding_bottom": 8
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     }
   },

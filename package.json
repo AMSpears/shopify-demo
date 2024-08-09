@@ -8,6 +8,7 @@
     "deploy": "run-s \"vite:build\" \"shopify:push -- {@}\" --",
     "shopify:dev": "shopify theme dev --store=frankandoakdemo",
     "shopify:push": "shopify theme push --store=frankandoakdemo",
+    "shopify:pull": "shopify theme pull --store=frankandoakdemo",
     "vite:dev": "vite",
     "vite:build": "vite build"
   },
