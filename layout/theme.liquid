@@ -335,6 +335,11 @@
         quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
       };
 
+      window.cartGifts = {
+        utmMedium: {{ settings.cart_gifts_utm_medium | json }},
+        productList: {{ settings.cart_gifts_product_list | json }},
+      }
+
       window.variantStrings = {
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
         soldOut: `{{ 'products.product.sold_out' | t }}`,
