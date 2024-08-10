@@ -100,6 +100,7 @@ class CartItems extends HTMLElement {
               targetElement.replaceWith(sourceElement);
             }
           }
+          this.renderCartGifts()
         })
         .catch((e) => {
           console.error(e);
@@ -118,6 +119,144 @@ class CartItems extends HTMLElement {
     }
   }
 
+  renderCartGifts() {
+    const cartGiftEl = document.querySelector('.drawer__cart-gifts');
+    const urlUtmMedium = new URLSearchParams(window.location.search).get('utm_medium') || sessionStorage.getItem('utm_medium');
+    
+    if (urlUtmMedium) {
+      // save utm_medium to sessionStorage so that it persist on page reload if it exists at the beginning
+      sessionStorage.setItem('utm_medium', urlUtmMedium);
+    }
+
+    const { cartTotal, cartGiftsThreshold, enabled, productList, utmMedium } = window.cartGifts;   
+    const showGiftList = (Number(cartGiftsThreshold) && Number(cartGiftsThreshold) >= Number(cartTotal)) || enabled || (utmMedium && urlUtmMedium === utmMedium);
+
+    if (productList.length > 0 && showGiftList) {
+      cartGiftEl?.classList.remove('hidden');
+
+      const giftEls = cartGiftEl?.querySelectorAll('input[name="gift_item"]')
+
+      giftEls?.forEach((giftEl) => giftEl.addEventListener('change', (e) => {
+        const variantId = e.target.value;
+        this.updateCartData(variantId, giftEls)
+      }))
+    } else {
+      cartGiftEl?.classList.add('hidden');
+    }
+
+    this.refreshCartDrawer(); 
+  }
+
+  addGiftToCart(productVariantId) {
+    if (!productVariantId) {
+      console.error('Invalid product');
+      return;
+    }
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: [
+          {
+            id: productVariantId,
+            quantity: 1,
+
+          },
+        ],
+      }),
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log("Gift Item added to the cart", response);
+      this.refreshCartDrawer()
+    })
+    .catch((e) => {
+      console.error("Unable to add Gift item to the cart", e);
+    })
+  }
+
+  removeGiftFromCart(productVariantId, callback){
+    fetch('/cart/update.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        updates: {
+          [productVariantId]: 0,
+        },
+      }),
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log("Gift Item removed from the cart", response);
+      this.refreshCartDrawer()
+    
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    })
+    .catch((e) => {
+      console.error("Unable to remove gift item from the cart", e);
+    })
+  };
+
+  updateCartData(variantId, giftEls) {
+    fetch('/cart.js')
+    .then((response) => response.json())
+    .then((cart) => {
+      let existingGift = null;
+      const giftElsVariantIds = Array.from(giftEls).map((el) => el.value);
+
+      // Find the existing gift item in the cart
+      for (let i = 0; i < cart.items.length; i++) {
+        const cartItemVariantId = cart.items[i].variant_id.toString();
+        if (giftElsVariantIds.includes(cartItemVariantId)) {
+          existingGift = cart.items[i];
+          break;
+        }
+      }
+
+      if (existingGift && existingGift.variant_id !== variantId) {
+        // If a different gift is selected, remove the existing one first
+        this.removeGiftFromCart(existingGift.variant_id, () => {
+          // After removing, add the new gift
+         this.addGiftToCart(variantId);
+        })
+      } else {
+        // If no gift is present, add the selected gift
+        this.addGiftToCart(variantId);
+      }
+    })
+    .catch((e) => {
+      console.error("Unable to fetch cart data", e);
+    });
+  }
+
+  refreshCartDrawer() {
+    fetch(`${routes.cart_url}?section_id=cart-drawer`)
+    .then((response) => response.text())
+    .then((responseText) => {
+      const html = new DOMParser().parseFromString(responseText, 'text/html');
+      const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
+      for (const selector of selectors) {
+        const targetElement = document.querySelector(selector);
+        const sourceElement = html.querySelector(selector);
+
+        if (targetElement && sourceElement) {
+          targetElement.replaceWith(sourceElement);
+        }
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+    }).catch((e) => {
+      console.error("Unable to fetch cart", e);
+    });
+  };
+  
   getSectionsToRender() {
     return [
       {
