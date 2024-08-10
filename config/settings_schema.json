@@ -1492,7 +1492,7 @@
         "type": "text", 
         "id": "cart_gifts_header",
         "label": "Gifts List Header",
-        "default": "Choose a free gift:",
+        "default": "Choose a free gift:"
       },
       {
         "type": "product_list",
