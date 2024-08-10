@@ -169,7 +169,7 @@ class CartItems extends HTMLElement {
     })
     .then((response) => response.json())
     .then((response) => {
-      console.log("Gift Item added to the cart", response);
+      console.log("Gift Item added to the cart");
       this.refreshCartDrawer()
     })
     .catch((e) => {
@@ -191,7 +191,7 @@ class CartItems extends HTMLElement {
     })
     .then((response) => response.json())
     .then((response) => {
-      console.log("Gift Item removed from the cart", response);
+      console.log("Gift Item removed from the cart");
       this.refreshCartDrawer()
     
       if (callback && typeof callback === 'function') {
@@ -284,7 +284,6 @@ class CartItems extends HTMLElement {
 
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
-
     const body = JSON.stringify({
       line,
       quantity,
@@ -372,6 +371,8 @@ class CartItems extends HTMLElement {
     setTimeout(() => {
       cartStatus.setAttribute('aria-hidden', true);
     }, 1000);
+
+    this.renderCartGifts();
   }
 
   getSectionInnerHTML(html, selector) {
