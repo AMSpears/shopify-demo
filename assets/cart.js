@@ -151,6 +151,7 @@ class CartItems extends HTMLElement {
     // if all items are removed from the cart, remove the gift from the cart
     if (Number(cartTotalValue) === 0) {
       this.updateCartData(null, giftEls, 0)
+      cartGiftEl?.classList.add('hidden');
     }
 
     this.refreshCartDrawer(); 
@@ -172,16 +173,27 @@ class CartItems extends HTMLElement {
         }
       }
 
+      if (cartTotal === 0) {
+        // if all items are removed from the cart, remove the gift from the cart
+        this.removeGiftFromCart(existingGift.variant_id)
+        return
+      }
+
       if (!variantId && (cartTotal < Number(cartGiftsThreshold)) ) {
-        // If no gift is present, remove gift from cart
-        this.removeGiftFromCart(existingGift.variantId)
+        // If the cart total is less than the threshold, remove the gift
+        if (existingGift && existingGift.variant_id) {
+          this.removeGiftFromCart(existingGift.variant_id)
+          return
+        }
       }
 
       if (existingGift && existingGift.variant_id !== variantId) {
         // If a different gift is selected, remove the existing one first
         this.removeGiftFromCart(existingGift.variant_id, () => {
           // After removing, add the new gift
-         this.addGiftToCart(variantId);
+          if (variantId) {
+            this.addGiftToCart(variantId);
+          }
         })
       } else {
         // If no gift is present, add the selected gift
@@ -239,6 +251,10 @@ class CartItems extends HTMLElement {
     .then((response) => response.json())
     .then((response) => {
       console.log("Gift Item removed from the cart");
+      // if all items are removed from the cart, remove the gift from the cart and reset cart state to empty
+      if (response.item_count === 0) { 
+        this.updateQuantity(0, 0);
+      }
       this.refreshCartDrawer()
       if (callback && typeof callback === 'function') {
         callback();
