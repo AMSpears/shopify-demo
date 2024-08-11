@@ -84,6 +84,7 @@ class CartItems extends HTMLElement {
 
   onChange(event) {
     this.validateQuantity(event);
+    this.renderCartGifts()
   }
 
   onCartUpdate() {
@@ -121,30 +122,75 @@ class CartItems extends HTMLElement {
 
   renderCartGifts() {
     const cartGiftEl = document.querySelector('.drawer__cart-gifts');
+    const cartTotalValue = document.querySelector('.drawer__footer .totals__total-value').innerHTML.replace('$', '').split('.')[0]
+
     const urlUtmMedium = new URLSearchParams(window.location.search).get('utm_medium') || sessionStorage.getItem('utm_medium');
-    
+    const giftEls = cartGiftEl?.querySelectorAll('input[name="gift_item"]')
+    const { cartTotal, cartGiftsThreshold, enabled, productList, utmMedium } = window.cartGifts;  
+    const currCartTotal = Number(cartTotalValue) || cartTotal;
+    const showGiftList = (cartGiftsThreshold && Number(cartGiftsThreshold) <= Number(currCartTotal)) || enabled || (utmMedium && urlUtmMedium === utmMedium);
+
     if (urlUtmMedium) {
       // save utm_medium to sessionStorage so that it persist on page reload if it exists at the beginning
       sessionStorage.setItem('utm_medium', urlUtmMedium);
     }
-
-    const { cartTotal, cartGiftsThreshold, enabled, productList, utmMedium } = window.cartGifts;   
-    const showGiftList = (Number(cartGiftsThreshold) && Number(cartGiftsThreshold) >= Number(cartTotal)) || enabled || (utmMedium && urlUtmMedium === utmMedium);
-
+    // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met 
     if (productList.length > 0 && showGiftList) {
       cartGiftEl?.classList.remove('hidden');
-
-      const giftEls = cartGiftEl?.querySelectorAll('input[name="gift_item"]')
-
       giftEls?.forEach((giftEl) => giftEl.addEventListener('change', (e) => {
         const variantId = e.target.value;
         this.updateCartData(variantId, giftEls)
       }))
+
     } else {
+      // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met
+      this.updateCartData(null, giftEls, currCartTotal)
       cartGiftEl?.classList.add('hidden');
     }
 
+    // if all items are removed from the cart, remove the gift from the cart
+    if (Number(cartTotalValue) === 0) {
+      this.updateCartData(null, giftEls, 0)
+    }
+
     this.refreshCartDrawer(); 
+  }
+
+  updateCartData(variantId, giftEls, cartTotal) {
+    fetch('/cart.js')
+    .then((response) => response.json())
+    .then((cart) => {
+      let existingGift = null;
+      const giftElsVariantIds = Array.from(giftEls).map((el) => el.value);
+      const {cartGiftsThreshold} = window.cartGifts;
+      // Find the existing gift item in the cart
+      for (let i = 0; i < cart.items.length; i++) {
+        const cartItemVariantId = cart.items[i].variant_id.toString();
+        if (giftElsVariantIds.includes(cartItemVariantId)) {
+          existingGift = cart.items[i];
+          break;
+        }
+      }
+
+      if (!variantId && (cartTotal < Number(cartGiftsThreshold)) ) {
+        // If no gift is present, remove gift from cart
+        this.removeGiftFromCart(existingGift.variantId)
+      }
+
+      if (existingGift && existingGift.variant_id !== variantId) {
+        // If a different gift is selected, remove the existing one first
+        this.removeGiftFromCart(existingGift.variant_id, () => {
+          // After removing, add the new gift
+         this.addGiftToCart(variantId);
+        })
+      } else {
+        // If no gift is present, add the selected gift
+        this.addGiftToCart(variantId);
+      }
+    })
+    .catch((e) => {
+      console.error("Unable to fetch cart data", e);
+    });
   }
 
   addGiftToCart(productVariantId) {
@@ -152,6 +198,7 @@ class CartItems extends HTMLElement {
       console.error('Invalid product');
       return;
     }
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: {
@@ -193,7 +240,6 @@ class CartItems extends HTMLElement {
     .then((response) => {
       console.log("Gift Item removed from the cart");
       this.refreshCartDrawer()
-    
       if (callback && typeof callback === 'function') {
         callback();
       }
@@ -202,38 +248,6 @@ class CartItems extends HTMLElement {
       console.error("Unable to remove gift item from the cart", e);
     })
   };
-
-  updateCartData(variantId, giftEls) {
-    fetch('/cart.js')
-    .then((response) => response.json())
-    .then((cart) => {
-      let existingGift = null;
-      const giftElsVariantIds = Array.from(giftEls).map((el) => el.value);
-
-      // Find the existing gift item in the cart
-      for (let i = 0; i < cart.items.length; i++) {
-        const cartItemVariantId = cart.items[i].variant_id.toString();
-        if (giftElsVariantIds.includes(cartItemVariantId)) {
-          existingGift = cart.items[i];
-          break;
-        }
-      }
-
-      if (existingGift && existingGift.variant_id !== variantId) {
-        // If a different gift is selected, remove the existing one first
-        this.removeGiftFromCart(existingGift.variant_id, () => {
-          // After removing, add the new gift
-         this.addGiftToCart(variantId);
-        })
-      } else {
-        // If no gift is present, add the selected gift
-        this.addGiftToCart(variantId);
-      }
-    })
-    .catch((e) => {
-      console.error("Unable to fetch cart data", e);
-    });
-  }
 
   refreshCartDrawer() {
     fetch(`${routes.cart_url}?section_id=cart-drawer`)
@@ -346,6 +360,7 @@ class CartItems extends HTMLElement {
         }
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+        this.renderCartGifts()
       })
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
@@ -371,8 +386,6 @@ class CartItems extends HTMLElement {
     setTimeout(() => {
       cartStatus.setAttribute('aria-hidden', true);
     }, 1000);
-
-    this.renderCartGifts();
   }
 
   getSectionInnerHTML(html, selector) {
