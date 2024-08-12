@@ -17,7 +17,7 @@
 
 .drawer__inner {
   height: 100%;
-  width: 40rem;
+  width: 60rem;
   max-width: calc(100vw - 3rem);
   padding: 0 1.5rem;
   border: 0.1rem solid rgba(var(--color-foreground), 0.2);
@@ -71,6 +71,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 .drawer__header {
   position: relative;
   padding: 1.5rem 0;
+  margin: 0 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,7 +89,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   box-shadow: 0 0 0 0.2rem rgba(var(--color-button), 0);
   position: absolute;
   top: 10px;
-  right: -10px;
+  /* right: -10px; */
   color: rgb(var(--color-foreground));
   background-color: transparent;
   border: none;
@@ -96,12 +97,14 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .cart-drawer__warnings .drawer__close {
-  right: 5px;
+  /* right: 5px; */
+  left: 5px;
 }
 
 .drawer__close svg {
   height: 2rem;
   width: 2rem;
+  transform: rotate(180deg);
 }
 
 .drawer__contents {
@@ -294,6 +297,18 @@ cart-drawer-items {
   .cart-drawer .cart-item cart-remove-button {
     margin-left: 0;
   }
+}
+
+.cart-drawer .cart-item cart-remove-button button {
+  margin-left: auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+}
+
+.cart-drawer .cart-item .quantity__input {
+  border: 1px solid #000000;
 }
 
 .cart-drawer__footer > * + * {
