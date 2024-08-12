@@ -302,11 +302,17 @@
 
 .card__heading {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 12px;
+  font-size: 14px;
+  text-transform: capitalize;
 }
 
 .card__heading:last-child {
   margin-bottom: 0;
+}
+
+.price__container .price-item {
+  font-size: 13px;
 }
 
 .card--horizontal .card__heading,
@@ -592,4 +598,10 @@
   .grid__item:nth-child(8n) .product-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-5));
   }
+}
+
+
+/*  */
+.collection-list .card__information .icon-wrap {
+  display: none;
 }
