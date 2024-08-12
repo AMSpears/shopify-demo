@@ -65,12 +65,51 @@
                                 {{ grandchildlink.title | escape }}
                               </a>
                             </li>
+
                           {%- endfor -%}
                         </ul>
                       {%- endif -%}
                     </li>
                   {%- endfor -%}
+                  {% assign curr_link_title = link.title |  downcase %}
+                  {% if curr_link_title contains 'sale' %}
+                    {% unless section.settings.drawer_menu_image_one_sale == blank%}
+                      <li class="mega_menu__image">
+                        <img src="{{ section.settings.drawer_menu_image_one_sale | img_url: 'large' }}" alt="{{ section.settings.drawer_menu_image_one_sale.alt }}" class="mega-menu__image" width="400px" height="400px">
+                      </li>
+                    {% endunless %}
+                    {% unless section.settings.drawer_menu_image_one_sale == blank%}
+                      <li class="mega_menu__image">
+                        <img src="{{ section.settings.drawer_menu_image_two_sale | img_url: 'large' }}" alt="{{ section.settings.drawer_menu_image_one_two.alt }}" class="mega-menu__image" width="400px" height="400px">
+                      </li>
+                    {% endunless %}
+                  {% endif %}
+                  {% if curr_link_title == 'women' %}
+                    {% unless section.settings.drawer_menu_image_one_women == blank %}
+                      <li class="mega_menu__image">
+                        <img src="{{ section.settings.drawer_menu_image_one_women | img_url: 'large' }}" alt="{{ section.settings.drawer_menu_image_one_women.alt }}" class="mega-menu__image" width="400px" height="400px">
+                      </li>
+                    {% endunless %}
+                    {% unless section.settings.drawer_menu_image_two_women == blank %}
+                      <li class="mega_menu__image">
+                        <img src="{{ section.settings.drawer_menu_image_two_women | img_url: 'large' }}" alt="{{ section.settings.drawer_menu_image_two_women.alt }}" class="mega-menu__image" width="400px" height="400px">
+                      </li>
+                    {% endunless %}
+                  {% endif %}
+                  {% if curr_link_title == 'men' %}
+                    {% unless section.settings.drawer_menu_image_one_men == blank %}
+                      <li class="mega_menu__image">
+                        <img src="{{ section.settings.drawer_menu_image_one_men | img_url: 'large' }}" alt="{{ section.settings.drawer_menu_image_one_men.alt }}" class="mega-menu__image" width="400px" height="400px">
+                      </li>
+                    {% endunless %}
+                    {% unless section.settings.drawer_menu_image_two_men == blank %}
+                      <li class="mega_menu__image">
+                        <img src="{{ section.settings.drawer_menu_image_two_men | img_url: 'large' }}" alt="{{ section.settings.drawer_menu_image_two_men.alt }}" class="mega-menu__image" width="400px" height="400px">
+                      </li>
+                    {% endunless %}
+                  {% endif %}
                 </ul>
+
               </div>
             </details>
           </header-menu>
