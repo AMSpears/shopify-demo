@@ -143,8 +143,6 @@ class CartItems extends HTMLElement {
         this.updateCartData(variantId, giftEls)
       }))
 
-      console.log("here")
-
     } else {
       // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met
       this.updateCartData(null, giftEls, currCartTotal)
