@@ -15,14 +15,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "The Stockroom Sale",
-            "heading_size": "h0"
+            "heading": "<strong>The Stockroom Sale<\/strong>",
+            "heading_size": "hxl"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
+            "button_label_1": "Women",
             "button_link_1": "shopify:\/\/collections\/women",
             "button_style_secondary_1": true,
             "button_label_2": "Men",
@@ -51,6 +51,12 @@
     "collection_list_tiNXit": {
       "type": "collection-list",
       "blocks": {
+        "featured_collection_QtEYdf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
         "featured_collection_LQqzxP": {
           "type": "featured_collection",
           "settings": {
@@ -80,21 +86,15 @@
           "settings": {
             "collection": ""
           }
-        },
-        "featured_collection_YHeRnL": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
         }
       },
       "block_order": [
+        "featured_collection_QtEYdf",
         "featured_collection_LQqzxP",
         "featured_collection_J3MTG9",
         "featured_collection_8rfrCw",
         "featured_collection_KG9xe6",
-        "featured_collection_nQhEHY",
-        "featured_collection_YHeRnL"
+        "featured_collection_nQhEHY"
       ],
       "settings": {
         "title": "Featured Categories",
@@ -111,31 +111,30 @@
     },
     "featured_collection": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
+        "title": "The Stockroom Sale — Incomparable prices, from our warehouse to you.",
+        "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
+        "collection": "frontpage",
+        "products_to_show": 4,
         "columns_desktop": 4,
         "full_width": false,
-        "show_view_all": true,
+        "show_view_all": false,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
+        "enable_desktop_slider": true,
         "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
+        "quick_add": "standard",
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "padding_top": 44,
-        "padding_bottom": 36
+        "padding_bottom": 40
       }
     }
   },
