@@ -154,7 +154,25 @@ class CartItems extends HTMLElement {
       cartGiftEl?.classList.add('hidden');
     }
 
+    this.initCartGiftsSlider();
     this.refreshCartDrawer(); 
+  }
+
+  initCartGiftsSlider() {
+    const swiper = new Swiper('.drawer__cart-gifts .swiper', {
+      direction: 'horizontal',
+      slidesPerView: 1.4,
+      draggable: true,
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    swiper.on('init', function() {
+      console.log('Swiper initialized', swiper);
+    });
   }
 
   updateCartData(variantId, giftEls, cartTotal) {
