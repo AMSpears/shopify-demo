@@ -16,14 +16,18 @@
                 id="HeaderMenu-{{ link.handle }}"
                 class="header__menu-item list-menu__item link focus-inset"
               >
-                <span
-                  {%- if link.child_active %}
-                    class="header__active-menu-item"
-                  {% endif %}
-                >
+               {% assign link_title_downcase = link.title | downcase %}
+               {% assign link_class = '' %}
+                {% if link.child_active %}
+                  {% assign link_class = 'header__active-menu-item' %}
+                {% endif %}
+                {% if link_title_downcase contains 'sale' %}
+                  {% assign link_class = link_class | append: ' sale' %}
+                {% endif %}
+                <span class="{{link_class}}">
                   {{- link.title | escape -}}
                 </span>
-                {% render 'icon-caret' %}
+                {% comment %} {% render 'icon-caret' %} {% endcomment %}
               </summary>
               <div
                 id="MegaMenu-Content-{{ forloop.index }}"
