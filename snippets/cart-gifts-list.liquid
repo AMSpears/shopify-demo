@@ -1,0 +1,100 @@
+{%- if settings.cart_type == 'drawer' -%}
+  <div class="drawer__cart-gifts hidden">
+    <h3 class="drawer__cart-gifts__title">{{ settings.cart_gifts_header }}</h3>
+    <div class="swiper">
+      <div class="drawer__cart-gifts__items swiper-wrapper">
+        {%- for product in settings.cart_gifts_product_list -%}
+          <div class="gift_item swiper-slide">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="100" height="100">
+            <div>
+              <h3 class="title">{{ product.title }}</h3>
+              <div class="input-wrapper">
+                <input 
+                  type="radio" 
+                  id="product_{{ product.variants[0].id }}" 
+                  name="gift_item" 
+                  value="{{ product.variants[0].id }}">
+                  <label for="product_{{ product.variants[0].id }}">Add</label>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="swiper-button-prev"> </div>
+      <div class="swiper-button-next">  </div> 
+    </div>
+  </div>
+{%- endif -%} 
+
+<style>
+  .drawer__cart-gifts {
+    padding: 20px;
+    border-top: 1px solid #e5e5e5;
+  }
+  .drawer__cart-gifts__title {
+    margin: 0 -10px 20px;
+    font-weight: 500;
+  }
+  .drawer__cart-gifts__items .gift_item {
+    display: flex;
+    align-items: flex-start;
+    border: 2px solid #000000;
+    margin-right: 10px;
+    padding: 20px;
+  }
+  .drawer__cart-gifts__items .gift_item img {
+    margin-right: 10px;
+  }
+  
+  .drawer__cart-gifts__items .gift_item .title {
+    margin: 0 0 10px;
+  }
+  .drawer__cart-gifts__items .gift_item .input-wrapper {
+    border: 1px solid #000000;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 5px;
+    width: 50%;
+  }
+  .drawer__cart-gifts__items .gift_item input[type="radio"] {
+    border: #ffffff;
+  }
+  .drawer__cart-gifts__items .gift_item label {
+    text-transform: uppercase;
+  }
+
+  /* SWIPER */
+  .swiper {
+    width: auto;
+    height: auto;
+    margin: 0 -10px;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    z-index: 99999;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#000000;
+    background: #e0d9d9;
+    padding: 15px;
+    border-radius: 50%;
+    opacity: .9;
+  }
+  .swiper-button-next {
+    right: 5px;
+  }
+  .swiper-button-prev {
+    left: 5px;
+  }
+  .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 15px;
+  }
+  .swiper-button-disabled {
+    display: none;
+  }
+</style>

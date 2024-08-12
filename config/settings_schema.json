@@ -1433,7 +1433,7 @@
             "label": "t:settings_schema.cart.settings.cart_type.notification.label"
           }
         ],
-        "default": "notification",
+        "default": "drawer",
         "label": "t:settings_schema.cart.settings.cart_type.label"
       },
       {
@@ -1463,6 +1463,42 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "Cart Gifts",
+        "info": "This section is only available on cart drawer."
+      }, 
+      {
+        "type": "checkbox",
+        "id": "cart_gifts_enabled",
+        "label": "Enable cart gifts",
+        "default": false,
+        "info": "Enabling this will show the free gifts list regardless of the cart value."
+      },
+      {
+        "type": "text",
+        "id": "cart_gifts_threshold",
+        "label": "Threshold",
+        "info": "The minimum cart value required to show the free gifts list."
+      },
+      {
+        "type": "text", 
+        "id": "cart_gifts_utm_medium",
+        "label": "UTM Medium",
+        "info": "The UTM medium value to be used for tracking free gifts. If the URL contains this UTM medium, the free gifts list will be shown regardless of the cart value."
+      },
+      {
+        "type": "text", 
+        "id": "cart_gifts_header",
+        "label": "Gifts List Header",
+        "default": "Choose a free gift:"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_gifts_product_list",
+        "label": "Free Gifts List",
+        "info": "The list of free gifts to be shown in the cart drawer."
       }
     ]
   }

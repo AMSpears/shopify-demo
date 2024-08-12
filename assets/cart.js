@@ -84,6 +84,7 @@ class CartItems extends HTMLElement {
 
   onChange(event) {
     this.validateQuantity(event);
+    this.renderCartGifts()
   }
 
   onCartUpdate() {
@@ -100,6 +101,7 @@ class CartItems extends HTMLElement {
               targetElement.replaceWith(sourceElement);
             }
           }
+          this.renderCartGifts()
         })
         .catch((e) => {
           console.error(e);
@@ -118,6 +120,191 @@ class CartItems extends HTMLElement {
     }
   }
 
+  renderCartGifts() {
+    const cartGiftEl = document.querySelector('.drawer__cart-gifts');
+    const cartTotalValue = document.querySelector('.drawer__footer .totals__total-value').innerHTML.replace('$', '').split('.')[0]
+
+    const urlUtmMedium = new URLSearchParams(window.location.search).get('utm_medium') || sessionStorage.getItem('utm_medium');
+    const giftEls = cartGiftEl?.querySelectorAll('input[name="gift_item"]')
+    const { cartTotal, cartGiftsThreshold, enabled, productList, utmMedium } = window.cartGifts;  
+    const currCartTotal = Number(cartTotalValue) || cartTotal;
+    const showGiftList = (cartGiftsThreshold && Number(cartGiftsThreshold) <= Number(currCartTotal)) || enabled || (utmMedium && urlUtmMedium === utmMedium);
+
+    if (urlUtmMedium) {
+      // save utm_medium to sessionStorage so that it persist on page reload if it exists at the beginning
+      sessionStorage.setItem('utm_medium', urlUtmMedium);
+    }
+    // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met 
+    if (productList.length > 0 && showGiftList) {
+      cartGiftEl?.classList.remove('hidden');
+      giftEls?.forEach((giftEl) => giftEl.addEventListener('change', (e) => {
+        const variantId = e.target.value;
+        this.updateCartData(variantId, giftEls)
+      }))
+
+    } else {
+      // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met
+      this.updateCartData(null, giftEls, currCartTotal)
+      cartGiftEl?.classList.add('hidden');
+    }
+
+    // if all items are removed from the cart, remove the gift from the cart
+    if (Number(cartTotalValue) === 0) {
+      this.updateCartData(null, giftEls, 0)
+      cartGiftEl?.classList.add('hidden');
+    }
+
+    this.initCartGiftsSlider();
+    this.refreshCartDrawer(); 
+  }
+
+  initCartGiftsSlider() {
+    const swiper = new Swiper('.drawer__cart-gifts .swiper', {
+      direction: 'horizontal',
+      slidesPerView: 1.4,
+      draggable: true,
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    swiper.on('init', function() {
+      console.log('Swiper initialized', swiper);
+    });
+  }
+
+  updateCartData(variantId, giftEls, cartTotal) {
+    fetch('/cart.js')
+    .then((response) => response.json())
+    .then((cart) => {
+      let existingGift = null;
+      const giftElsVariantIds = Array.from(giftEls).map((el) => el.value);
+      const {cartGiftsThreshold} = window.cartGifts;
+      // Find the existing gift item in the cart
+      for (let i = 0; i < cart.items.length; i++) {
+        const cartItemVariantId = cart.items[i].variant_id.toString();
+        if (giftElsVariantIds.includes(cartItemVariantId)) {
+          existingGift = cart.items[i];
+          break;
+        }
+      }
+
+      if (cartTotal === 0) {
+        // if all items are removed from the cart, remove the gift from the cart
+        this.removeGiftFromCart(existingGift.variant_id)
+        return
+      }
+
+      if (!variantId && (cartTotal < Number(cartGiftsThreshold)) ) {
+        // If the cart total is less than the threshold, remove the gift
+        if (existingGift && existingGift.variant_id) {
+          this.removeGiftFromCart(existingGift.variant_id)
+          return
+        }
+      }
+
+      if (existingGift && existingGift.variant_id !== variantId) {
+        // If a different gift is selected, remove the existing one first
+        this.removeGiftFromCart(existingGift.variant_id, () => {
+          // After removing, add the new gift
+          if (variantId) {
+            this.addGiftToCart(variantId);
+          }
+        })
+      } else {
+        // If no gift is present, add the selected gift
+        this.addGiftToCart(variantId);
+      }
+    })
+    .catch((e) => {
+      console.error("Unable to fetch cart data", e);
+    });
+  }
+
+  addGiftToCart(productVariantId) {
+    if (!productVariantId) {
+      console.error('Invalid product');
+      return;
+    }
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: [
+          {
+            id: productVariantId,
+            quantity: 1,
+
+          },
+        ],
+      }),
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log("Gift Item added to the cart");
+      this.refreshCartDrawer()
+    })
+    .catch((e) => {
+      console.error("Unable to add Gift item to the cart", e);
+    })
+  }
+
+  removeGiftFromCart(productVariantId, callback){
+    fetch('/cart/update.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        updates: {
+          [productVariantId]: 0,
+        },
+      }),
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log("Gift Item removed from the cart");
+      // if all items are removed from the cart, remove the gift from the cart and reset cart state to empty
+      if (response.item_count === 0) { 
+        this.updateQuantity(0, 0);
+      }
+      this.refreshCartDrawer()
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    })
+    .catch((e) => {
+      console.error("Unable to remove gift item from the cart", e);
+    })
+  };
+
+  refreshCartDrawer() {
+    fetch(`${routes.cart_url}?section_id=cart-drawer`)
+    .then((response) => response.text())
+    .then((responseText) => {
+      const html = new DOMParser().parseFromString(responseText, 'text/html');
+      const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
+      for (const selector of selectors) {
+        const targetElement = document.querySelector(selector);
+        const sourceElement = html.querySelector(selector);
+
+        if (targetElement && sourceElement) {
+          targetElement.replaceWith(sourceElement);
+        }
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+    }).catch((e) => {
+      console.error("Unable to fetch cart", e);
+    });
+  };
+  
   getSectionsToRender() {
     return [
       {
@@ -145,7 +332,6 @@ class CartItems extends HTMLElement {
 
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
-
     const body = JSON.stringify({
       line,
       quantity,
@@ -208,6 +394,7 @@ class CartItems extends HTMLElement {
         }
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+        this.renderCartGifts()
       })
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
