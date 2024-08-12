@@ -4,8 +4,8 @@
     <div class="swiper">
       <div class="drawer__cart-gifts__items swiper-wrapper">
         {%- for product in settings.cart_gifts_product_list -%}
-          <div class="gift_item swiper-slide">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="100" height="100">
+          <div class="gift__item swiper-slide">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="120" height="140">
             <div>
               <h3 class="title">{{ product.title }}</h3>
               <div class="input-wrapper">
@@ -14,7 +14,7 @@
                   id="product_{{ product.variants[0].id }}" 
                   name="gift_item" 
                   value="{{ product.variants[0].id }}">
-                  <label for="product_{{ product.variants[0].id }}">Add</label>
+                  <label for="product_{{ product.variants[0].id }}">Select</label>
               </div>
             </div>
           </div>
@@ -34,34 +34,45 @@
   .drawer__cart-gifts__title {
     margin: 0 -10px 20px;
     font-weight: 500;
+    background-color: #fdf158;
+    padding: 10px;
   }
-  .drawer__cart-gifts__items .gift_item {
+  .drawer__cart-gifts__items .gift__item {
     display: flex;
     align-items: flex-start;
     border: 2px solid #000000;
     margin-right: 10px;
     padding: 20px;
+    min-height: 140px;
   }
-  .drawer__cart-gifts__items .gift_item img {
+  .drawer__cart-gifts__items .gift__item img {
     margin-right: 10px;
   }
   
-  .drawer__cart-gifts__items .gift_item .title {
+  .drawer__cart-gifts__items .gift__item .title {
+    font-size: 14px;
     margin: 0 0 10px;
   }
-  .drawer__cart-gifts__items .gift_item .input-wrapper {
+  .drawer__cart-gifts__items .gift__item .input-wrapper {
+    width: 120px;
+    padding: 5px;
     border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .drawer__cart-gifts__items .gift__item .input-wrapper .selected {
     background-color: #000000;
     color: #ffffff;
-    cursor: pointer;
-    padding: 5px;
-    width: 50%;
   }
-  .drawer__cart-gifts__items .gift_item input[type="radio"] {
-    border: #ffffff;
+  .drawer__cart-gifts__items .gift__item input[type="radio"] {
+    display: none
   }
-  .drawer__cart-gifts__items .gift_item label {
-    text-transform: uppercase;
+
+  .drawer__cart-gifts__items .gift__item label {
+    text-transform: capitalize;
   }
 
   /* SWIPER */

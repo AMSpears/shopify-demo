@@ -137,10 +137,13 @@ class CartItems extends HTMLElement {
     // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met 
     if (productList.length > 0 && showGiftList) {
       cartGiftEl?.classList.remove('hidden');
+
       giftEls?.forEach((giftEl) => giftEl.addEventListener('change', (e) => {
         const variantId = e.target.value;
         this.updateCartData(variantId, giftEls)
       }))
+
+      console.log("here")
 
     } else {
       // Remove gift from cart if a cartGiftsThreshold and the threshold is no longer met
@@ -217,6 +220,23 @@ class CartItems extends HTMLElement {
         // If no gift is present, add the selected gift
         this.addGiftToCart(variantId);
       }
+
+      // loop through all the gifts els and check if the selected gift is the same as the existing gift
+      // if is the same as the exisiting gift then check the input el and updated label text to say "Selected"
+      // if is not the same as the existing gift then check the input el and updated label text to say "Select"
+      //TODO:  check if this can be implemented earlier so that we don't have to loop through all the gift els
+      const giftItemsWrapper = document.querySelectorAll('.drawer__cart-gifts__items .gift__item ');
+      giftItemsWrapper.forEach((el) => {
+        const giftItemVariantId = el.querySelector('input[name="gift_item"]').value;
+        const giftItemLabel = el.querySelector('label');
+        console.log("giftItemVariantId", typeof giftItemVariantId, typeof variantId)
+        console.log("giftItemLabel", giftItemLabel)
+        if (giftItemVariantId === variantId) {
+          giftItemLabel.textContent = 'Selected'; 
+        } else {
+          giftItemLabel.textContent = 'Select';
+        }
+      })
     })
     .catch((e) => {
       console.error("Unable to fetch cart data", e);
