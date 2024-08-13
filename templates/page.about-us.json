@@ -164,6 +164,44 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "image_with_text_AmWRzk": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_7me9En": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our community",
+            "heading_size": "h1"
+          }
+        },
+        "text_XxQwRN": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Mighty oaks from little acorns grow<br\/><\/h3><p>It only takes a tiny spark to turn a meaningful idea into an impactful pursuit. Today, we are a group of 300 people from over 20 different countries. Sharing our optimism and embodying our values is our job, but it is also a reflection of our true selves. We stand together on what’s important. Here are a few throwbacks to some of our achievements:<\/p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7me9En",
+        "text_XxQwRN"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Screenshot_2024-08-12_at_6.47.36_PM.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -171,6 +209,7 @@
     "image_banner_kHKw9C",
     "rich_text_YXpCRt",
     "image_with_text_AFqMgJ",
-    "multicolumn_HdggcB"
+    "multicolumn_HdggcB",
+    "image_with_text_AmWRzk"
   ]
 }
