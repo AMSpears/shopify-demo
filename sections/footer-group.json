@@ -14,6 +14,12 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "brand_information_hYEnGK": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
         "link_list_6eDA4W": {
           "type": "link_list",
           "settings": {
@@ -34,20 +40,13 @@
             "heading": "Customer Care",
             "menu": "footer-customer-care"
           }
-        },
-        "text_fzKTGL": {
-          "type": "text",
-          "settings": {
-            "heading": "Stay in touch",
-            "subtext": "<p>Join our newsletter and stay in the know about new collections, outfit inspiration, sales, and more.<\/p>"
-          }
         }
       },
       "block_order": [
+        "brand_information_hYEnGK",
         "link_list_6eDA4W",
         "link_list_LAUJe4",
-        "link_list_kbr4w8",
-        "text_fzKTGL"
+        "link_list_kbr4w8"
       ],
       "settings": {
         "color_scheme": "scheme-4",
