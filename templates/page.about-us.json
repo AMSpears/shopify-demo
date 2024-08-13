@@ -126,8 +126,17 @@
         "column_YTeHWt": {
           "type": "column",
           "settings": {
-            "title": "Inspire innovation",
+            "title": "<strong>Inspire innovation<\/strong>",
             "text": "<p>We are a forward-thinking brand that delivers cutting-edge products to fit our customers' modern and evolving lifestyles.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_cMk9wK": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Be authentic<\/strong>",
+            "text": "<p>We are driven by passion, not ego. We recognize and celebrate our individuality, strengths, and even weaknesses, but remain humble and open to continuous improvement.<\/p>",
             "link_label": "",
             "link": ""
           }
@@ -136,7 +145,8 @@
       "block_order": [
         "column_4ErXVA",
         "column_xPtcW9",
-        "column_YTeHWt"
+        "column_YTeHWt",
+        "column_cMk9wK"
       ],
       "settings": {
         "title": "Our values",
