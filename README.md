@@ -21,7 +21,7 @@ A spin-off of the [Frank and Oak store](https://www.frankandoak.com/), showcasin
 - [Theme Editor](https://frankandoakdemo.myshopify.com/admin/themes/137324363952/editor)
 - [Preview Theme](https://frankandoakdemo.myshopify.com/?preview_theme_id=137324363952)
 - [Ad for specific customers](https://docs.google.com/presentation/d/1HhwRgvt695Iw7Z1DI4XgVzGOsurL99Mv4uTjbW85dPQ/edit?usp=sharing])
-- [Upsell product example](https://frankandoakdemo.myshopify.com/products/the-alpine-parka-in-rosin?_pos=1&_sid=58b305e52&_ss=r)
+- [Bundle product example](https://frankandoakdemo.myshopify.com/products/the-alpine-parka-in-rosin?_pos=1&_sid=58b305e52&_ss=r)
 
 ## Testing scenarios: 
 - The admin enables the cart gifts section to appear when a user adds a product to the cart.
