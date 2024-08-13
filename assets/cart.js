@@ -84,7 +84,6 @@ class CartItems extends HTMLElement {
 
   onChange(event) {
     this.validateQuantity(event);
-    this.renderCartGifts()
   }
 
   onCartUpdate() {
@@ -101,7 +100,6 @@ class CartItems extends HTMLElement {
               targetElement.replaceWith(sourceElement);
             }
           }
-          this.renderCartGifts()
         })
         .catch((e) => {
           console.error(e);
@@ -120,6 +118,9 @@ class CartItems extends HTMLElement {
     }
   }
 
+  /**
+   * Render cart gifts based on the cart total value, threshold, utm_medium and enabled status
+   */
   renderCartGifts() {
     const cartGiftEl = document.querySelector('.drawer__cart-gifts');
     const cartTotalValue = document.querySelector('.drawer__footer .totals__total-value').innerHTML.replace('$', '').split('.')[0]
@@ -143,6 +144,7 @@ class CartItems extends HTMLElement {
         const spanEl = giftEl.querySelector('span');
         giftEl.addEventListener('click', (e) => {
           this.updateCartData(variantId, giftEls, currCartTotal)
+        //  this.updateQuantity()
           giftEl.classList.add('selected');
           spanEl.innerText = 'Selected'
         })
@@ -162,7 +164,9 @@ class CartItems extends HTMLElement {
     this.initCartGiftsSlider();
     this.refreshCartDrawer(); 
   }
-
+ /**
+  * Initialize the cart gifts slider
+  */
   initCartGiftsSlider() {
     const swiper = new Swiper('.drawer__cart-gifts .swiper', {
       direction: 'horizontal',
@@ -180,6 +184,12 @@ class CartItems extends HTMLElement {
     });
   }
 
+  /**
+   *  Update the cart data based on the selected gift
+   * @param {*} variantId 
+   * @param {*} giftEls 
+   * @param {*} cartTotal 
+   */
   updateCartData(variantId, giftEls, cartTotal) {
     fetch('/cart.js')
     .then((response) => response.json())
@@ -240,9 +250,14 @@ class CartItems extends HTMLElement {
     });
   }
 
+  /**
+   * Add gift item to the cart
+   * @param {*} productVariantId 
+   * @returns 
+   */
   addGiftToCart(productVariantId) {
     if (!productVariantId) {
-      console.error('Invalid product');
+      console.log('Invalid product variant id');
       return;
     }
 
@@ -271,6 +286,11 @@ class CartItems extends HTMLElement {
     })
   }
 
+  /**
+   * Remove gift item from the cart
+   * @param {*} productVariantId 
+   * @param {*} callback 
+   */
   removeGiftFromCart(productVariantId, callback){
     fetch('/cart/update.js', {
       method: 'POST',
@@ -300,6 +320,9 @@ class CartItems extends HTMLElement {
     })
   };
 
+  /**
+   * Refresh the cart drawer 
+   */
   refreshCartDrawer() {
     fetch(`${routes.cart_url}?section_id=cart-drawer`)
     .then((response) => response.text())
@@ -349,6 +372,7 @@ class CartItems extends HTMLElement {
 
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
+    console.log('Updating quantity', line, quantity, name, variantId);
     const body = JSON.stringify({
       line,
       quantity,
