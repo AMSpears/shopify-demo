@@ -67,7 +67,13 @@
         "mobile_logo_position": "center",
         "margin_bottom": 0,
         "padding_top": 12,
-        "padding_bottom": 12
+        "padding_bottom": 12,
+        "drawer_menu_image_one_sale": "shopify:\/\/shop_images\/1980044-4CW.9853_1200x_678ecf85-da54-4d36-8bdd-aae6fe8c447f.webp",
+        "drawer_menu_image_two_sale": "shopify:\/\/shop_images\/1940085-002.02_2000x_82d6bcbd-da5c-4727-a6b6-a53de1fa19a0.webp",
+        "drawer_menu_image_one_women": "shopify:\/\/shop_images\/2230122-599.02_2000x_d550838c-07d0-4d7a-9ab4-04d581a11a77.jpg",
+        "drawer_menu_image_two_women": "shopify:\/\/shop_images\/2230122-599.01_2000x_5fad8c3f-f0b0-4a4a-9e8d-19dccc3721a3.webp",
+        "drawer_menu_image_one_men": "shopify:\/\/shop_images\/1940097-628.741_2000x_9cced0b6-3293-49e3-8b8a-406f79c42c10.webp",
+        "drawer_menu_image_two_men": "shopify:\/\/shop_images\/1940097-628.743_2000x_79d204cd-e11f-4ba4-9677-6bf98229caec.webp"
       }
     }
   },
