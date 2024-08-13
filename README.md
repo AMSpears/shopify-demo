@@ -10,12 +10,11 @@ A spin-off of the [Frank and Oak store](https://www.frankandoak.com/), showcasin
 - Run npm run dev to preview
 
 ## Main files:
-- section/cart-gifts-list.liquid
+- config/settings_schema.liquid
 - snippets/cart-gifts-list.liquid
 - assets/cart.js
 - assets/cart-drawer.js
 - assets/component-cart-gifts-list.css
-- config/settings_schema.liquid
 
 ## Testing:
 - [Theme Editor](https://frankandoakdemo.myshopify.com/admin/themes/137324363952/editor)
