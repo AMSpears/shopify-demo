@@ -117,8 +117,8 @@
         "column_xPtcW9": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "title": "<strong>Create communities<\/strong>",
+            "text": "<p>We bring together a community of passionate and diverse individuals who want to be part of something bigger.<\/p>",
             "link_label": "",
             "link": ""
           }
@@ -126,8 +126,8 @@
         "column_YTeHWt": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "title": "Inspire innovation",
+            "text": "<p>We are a forward-thinking brand that delivers cutting-edge products to fit our customers' modern and evolving lifestyles.<\/p>",
             "link_label": "",
             "link": ""
           }
