@@ -469,6 +469,10 @@
   .banner--content-align-right .banner__buttons--multiple {
     justify-content: flex-end;
   }
+  
+  .banner__buttons {
+    gap: 2rem;
+  }
 }
 
 .banner__box > * + .banner__buttons {

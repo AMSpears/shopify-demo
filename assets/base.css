@@ -2770,6 +2770,7 @@ details[open] > .header__submenu {
 
 .header__menu-item:hover {
   color: rgb(var(--color-foreground));
+  background-color: #f9f9f9;
 }
 
 .header__menu-item span {
@@ -2779,14 +2780,19 @@ details[open] > .header__submenu {
 .header__menu-item:hover span {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
+  text-decoration-color: #000000;
 }
 
+
+.header__menu-item .sale {
+  color:#ed2e00;
+}
 details[open] > .header__menu-item {
-  text-decoration: underline;
+  background-color: #f9f9f9;
 }
 
 details[open]:hover > .header__menu-item {
-  text-decoration-thickness: 0.2rem;
+  background-color: #f9f9f9;
 }
 
 details[open] > .header__menu-item .icon-caret {
