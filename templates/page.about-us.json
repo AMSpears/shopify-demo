@@ -171,14 +171,14 @@
         "heading_7me9En": {
           "type": "heading",
           "settings": {
-            "heading": "Our community",
+            "heading": "<strong>Our community<\/strong>",
             "heading_size": "h1"
           }
         },
         "text_XxQwRN": {
           "type": "text",
           "settings": {
-            "text": "<h3>Mighty oaks from little acorns grow<br\/><\/h3><p>It only takes a tiny spark to turn a meaningful idea into an impactful pursuit. Today, we are a group of 300 people from over 20 different countries. Sharing our optimism and embodying our values is our job, but it is also a reflection of our true selves. We stand together on what’s important. Here are a few throwbacks to some of our achievements:<\/p>",
+            "text": "<h3>Mighty oaks from little acorns grow<\/h3><p>It only takes a tiny spark to turn a meaningful idea into an impactful pursuit. Today, we are a group of 300 people from over 20 different countries. Sharing our optimism and embodying our values is our job, but it is also a reflection of our true selves. We stand together on what’s important. Here are a few throwbacks to some of our achievements:<\/p>",
             "text_style": "body"
           }
         }
