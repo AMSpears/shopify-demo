@@ -14,7 +14,7 @@ A spin-off of the [Frank and Oak store](https://www.frankandoak.com/), showcasin
 - snippets/cart-gifts-list.liquid
 - assets/cart.js
 - assets/cart-drawer.js
-- assets/cart-gifts-list.css
+- assets/component-cart-gifts-list.css
 - config/settings_schema.liquid
 
 ## Testing:
