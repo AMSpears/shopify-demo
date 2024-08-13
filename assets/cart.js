@@ -84,7 +84,6 @@ class CartItems extends HTMLElement {
 
   onChange(event) {
     this.validateQuantity(event);
-    this.renderCartGifts()
   }
 
   onCartUpdate() {
@@ -101,7 +100,6 @@ class CartItems extends HTMLElement {
               targetElement.replaceWith(sourceElement);
             }
           }
-          this.renderCartGifts()
         })
         .catch((e) => {
           console.error(e);
@@ -146,6 +144,7 @@ class CartItems extends HTMLElement {
         const spanEl = giftEl.querySelector('span');
         giftEl.addEventListener('click', (e) => {
           this.updateCartData(variantId, giftEls, currCartTotal)
+        //  this.updateQuantity()
           giftEl.classList.add('selected');
           spanEl.innerText = 'Selected'
         })
@@ -373,6 +372,7 @@ class CartItems extends HTMLElement {
 
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
+    console.log('Updating quantity', line, quantity, name, variantId);
     const body = JSON.stringify({
       line,
       quantity,
