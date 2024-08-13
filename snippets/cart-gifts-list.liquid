@@ -18,6 +18,7 @@
                {% endfor %}
           
                <button class="select-btn {% if is_selected %} selected {% endif %}" type="button" data-variant-id="{{variant_id}}">
+                {% render 'icon-checkmark' %}
                 {% if is_selected %} 
                   <span>Selected</span> 
                 {% else %}
@@ -75,9 +76,20 @@
     background-color: #000000;
     color: #ffffff;
   }
-  .drawer__cart-gifts__items .gift__item button svg {
-    margin-right: 5px;
+  
+  .drawer__cart-gifts__items .gift__item button.selected svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
   }
+  .drawer__cart-gifts__items .gift__item button svg {
+    display: none;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+
   /* SWIPER */
   .swiper {
     width: auto;
