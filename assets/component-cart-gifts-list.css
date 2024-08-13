@@ -1,0 +1,98 @@
+.drawer__cart-gifts {
+  padding: 20px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.drawer__cart-gifts__title {
+  margin: 0 -10px 20px;
+  font-weight: 500;
+  background-color: #fdf158;
+  padding: 10px;
+}
+
+.drawer__cart-gifts__items .gift__item {
+  display: flex;
+  align-items: flex-start;
+  border: 2px solid #000000;
+  margin-right: 10px;
+  padding: 20px;
+  min-height: 140px;
+}
+
+.drawer__cart-gifts__items .gift__item img {
+  margin-right: 10px;
+}
+
+.drawer__cart-gifts__items .gift__item .title {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.drawer__cart-gifts__items .gift__item button {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.drawer__cart-gifts__items .gift__item button.selected {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.drawer__cart-gifts__items .gift__item button.selected svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+}
+
+.drawer__cart-gifts__items .gift__item button svg {
+  display: none;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+}
+
+/* SWIPER */
+.swiper {
+  width: auto;
+  height: auto;
+  margin: 0 -10px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  z-index: 99999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#000000;
+  background: #e0d9d9;
+  padding: 15px;
+  border-radius: 50%;
+  opacity: .9;
+}
+
+.swiper-button-next {
+  right: 5px;
+}
+
+.swiper-button-prev {
+  left: 5px;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 15px;
+}
+
+.swiper-button-disabled {
+  display: none;
+}
