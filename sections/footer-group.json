@@ -40,13 +40,21 @@
             "heading": "Customer Care",
             "menu": "footer-customer-care"
           }
+        },
+        "text_H4P8Jc": {
+          "type": "text",
+          "settings": {
+            "heading": "Stay in touch",
+            "subtext": "<p>Join our newsletter and stay in the know about new collections, outfit inspiration, sales, and more.<\/p>"
+          }
         }
       },
       "block_order": [
         "brand_information_hYEnGK",
         "link_list_6eDA4W",
         "link_list_LAUJe4",
-        "link_list_kbr4w8"
+        "link_list_kbr4w8",
+        "text_H4P8Jc"
       ],
       "settings": {
         "color_scheme": "scheme-4",
