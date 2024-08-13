@@ -32,10 +32,33 @@
         "stack_images_on_mobile": true,
         "show_text_below": true
       }
+    },
+    "rich_text_YXpCRt": {
+      "type": "rich-text",
+      "blocks": {
+        "text_6hN8WX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We believe in considering the impact of the choices we make every day and view those choices as an opportunity to better ourselves. Our purpose is to Inspire a Better way of Living by creating conscious products that last through time. By marrying innovation with eco-friendly processes, we strive to help shape a cleaner, healthier, and more mindful world where human progress is in harmony with the planet's well-being.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_6hN8WX"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "main",
-    "image_banner_kHKw9C"
+    "image_banner_kHKw9C",
+    "rich_text_YXpCRt"
   ]
 }
