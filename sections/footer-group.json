@@ -43,6 +43,7 @@
         },
         "text_H4P8Jc": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "heading": "Stay in touch",
             "subtext": "<p>Join our newsletter and stay in the know about new collections, outfit inspiration, sales, and more.<\/p>"
