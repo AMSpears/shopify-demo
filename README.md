@@ -1,7 +1,7 @@
 # Shopify: Frank and Oak Demo
 
 ## Description 
-A spin-off of the [Frank and Oak store](https://www.frankandoak.com/), showcasing a cart gifts feature created for demo purposes. This also highlights the installation of Selleasy bundles, using the Dawn store as a base theme with some additional customizations.
+A spin-off of the [Frank and Oak store](https://www.frankandoak.com/), showcasing a cart gifts feature created for demo purposes. This also highlights the installation of Selleasy bundles and uses the Dawn store as a base theme with some additional customizations.
 
 ## Start the project run: 
 - Clone the repo
