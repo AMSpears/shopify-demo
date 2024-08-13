@@ -449,6 +449,15 @@
   word-break: break-word;
 }
 
+.banner__buttons a {
+  border: 2px solid #000000;
+}
+
+.banner__buttons a:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 @media screen and (max-width: 749px) {
   .banner--content-align-mobile-right .banner__buttons--multiple {
     justify-content: flex-end;

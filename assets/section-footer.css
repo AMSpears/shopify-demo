@@ -150,14 +150,14 @@
 }
 
 .footer-block__heading {
-  margin-bottom: 2rem;
+  margin-bottom: 24px;
   margin-top: 0;
   font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
 @media screen and (min-width: 990px) {
   .footer-block__heading {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
+    font-size: 24px;
   }
 }
 
@@ -337,7 +337,7 @@
 
 .footer-block__details-content .list-menu__item--link,
 .copyright__content a {
-  color: rgba(var(--color-foreground), 0.75);
+  color: #ffffff;
 }
 
 .footer-block__details-content .list-menu__item--active {
