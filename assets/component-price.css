@@ -63,6 +63,10 @@
   display: none;
 }
 
+.price-item--sale {
+  color: #ed2e00;;
+}
+
 .price--sold-out .price__badge-sold-out,
 .price--on-sale .price__badge-sale,
 .volume-pricing--sale-badge .price__badge-sale {
