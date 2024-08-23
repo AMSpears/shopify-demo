@@ -128,9 +128,9 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
-    "cart_gifts_enabled": false,
+    "cart_gifts_enabled": true,
     "cart_gifts_threshold": "",
-    "cart_gifts_utm_medium": "instagram",
+    "cart_gifts_utm_medium": "",
     "cart_gifts_product_list": [
       "the-large-frank-and-oak-tote-bag-in-black",
       "the-frank-and-oak-tote-bag-in-natural-light",
